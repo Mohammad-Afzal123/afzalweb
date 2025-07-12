@@ -1,58 +1,42 @@
 import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
+import { useGLTF, useAnimations } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 
-const ThreeScene = () => {
-  const mountRef = useRef(null);
-  const hasInitializedRef = useRef(false); // 🛑 Prevent double run
+const Character = ({ animationName }) => {
+  const group = useRef();
+  const { scene, animations } = useGLTF('/models/character.glb'); // Place file in public/models/
+  const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    if (hasInitializedRef.current) return; // ✅ Block second run in dev
-    hasInitializedRef.current = true;
+    if (actions && animationName) {
+      Object.values(actions).forEach((action) => action.stop());
+      actions[animationName]?.reset().fadeIn(0.5).play();
+    }
+  }, [animationName, actions]);
 
-    const currentMount = mountRef.current;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      currentMount.clientWidth / currentMount.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 2;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    currentMount.appendChild(renderer.domElement);
-
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x007bff, wireframe: true });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    return () => {
-      if (currentMount && renderer.domElement) {
-        currentMount.removeChild(renderer.domElement);
-        geometry.dispose();
-        material.dispose();
-        renderer.dispose();
-      }
-    };
-  }, []);
-
-  return (
-    <div
-      ref={mountRef}
-      style={{ width: '100%', height: '400px', border: '1px solid #ccc' }}
-    ></div>
-  );
+  return <primitive ref={group} object={scene} scale={1.5} />;
 };
 
-export default ThreeScene;
+export default function ThreeScene() {
+  const [animation, setAnimation] = React.useState('Idle'); // Replace with actual animation name if needed
+
+  return (
+    <div className="three-wrapper">
+      {/* 🔘 Button Section */}
+      <section className="three-controls">
+        <button onClick={() => setAnimation('Armature|mixamo.com|Layer0')}>RUN</button>
+      </section>
+
+      {/* 🧊 Canvas Section */}
+      <section className="three-canvas">
+        <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[0, 5, 5]} />
+          <Character animationName={animation} />
+          <OrbitControls />
+        </Canvas>
+      </section>
+    </div>
+  );
+}
