@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import LogoLoader from './LogoLoader';
 import ThreeScene from './ThreeScene';
 import './App.css';
-
+import MemoryCarousel from './MemoryCarousel';
+import Card from './Card';
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +33,12 @@ export default function App() {
       {/* 🔹 Main 3D scene or content */}
       <div className="content">
         <ThreeScene />
+        <hr className="separator" />
       </div>
+      <br />
+      <MemoryCarousel />
+      <br />
+      <Card/>
     </div>
   );
 }
