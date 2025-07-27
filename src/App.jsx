@@ -5,6 +5,8 @@ import './App.css';
 import MemoryCarousel from './MemoryCarousel';
 import Card from './Card';
 import GlassCursor from './GlassCursor';
+import { VideoText } from './VideoText';
+
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -56,6 +58,29 @@ export default function App() {
         />
         Your browser does not support the video tag.
       </video>
+        <div className="w-full flex justify-center items-center py-10">
+      <div className="w-[80px] h-[40px]">
+        <VideoText
+          src="https://ls29t3z55w.ufs.sh/f/JEKFIJDsOBct0vrmLYJRG8BKHmvZQkWJ9ElIVcNfzPg63Mbo"
+          fontFamily="Helvetica, Arial, sans-serif"
+          fontSize={200}
+          letterSpacing="0.03em"
+          textTransform="uppercase"
+          fontWeight="bold"
+          sources={[
+            { src: "fallback.webm", type: "video/webm" },
+            { src: "fallback.ogv", type: "video/ogg" },
+          ]}
+          onVideoLoad={() => console.log("Video loaded")}
+          onVideoError={(err) => console.error("Video error", err)}
+        >
+          Sera UI
+        </VideoText>
+      </div>
+    </div>
+
+      <br></br>
+      
 
     </div>
   );

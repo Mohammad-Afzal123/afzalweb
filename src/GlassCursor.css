@@ -1,48 +1,11 @@
-/* Hide system cursor */
-body, * {
-  cursor: none !important;
-}
-
-/* Cursor Base */
-.neon-cursor {
+.glass-cursor-container {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #a100ff 0%, #5a00a8 100%);
-  box-shadow: 0 0 20px #d000ff, 0 0 40px #b300ff;
+  translate: -50% -50%;
+  z-index: 1000;
   pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease;
+  will-change: transform;
 }
 
-/* Grows when hovering */
-.neon-cursor.hovered {
-  transform: translate(-50%, -50%) scale(1.7);
-}
-
-/* Purple Flame Particle */
-.flame-particle {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, #c700ff, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%) scale(1.2) rotate(45deg);
-  animation: flame-fade 0.6s ease-out forwards;
-  filter: blur(4px);
-}
-
-@keyframes flame-fade {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -60%) scale(0.5) rotate(90deg);
-  }
+.glass-cursor-svg {
+  scale: 0.5;
 }
