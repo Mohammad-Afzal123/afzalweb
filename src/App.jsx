@@ -6,7 +6,7 @@ import MemoryCarousel from './MemoryCarousel';
 import Card from './Card';
 import GlassCursor from './GlassCursor';
 import { VideoText } from './VideoText';
-
+import Spline from '@splinetool/react-spline';
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -80,7 +80,9 @@ export default function App() {
     </div>
 
       <br></br>
-      
+      <div style={{ width: '100vw', height: '100vh' }}>
+      <Spline scene="https://prod.spline.design/x8pviGljQ1dRsMWf/scene.splinecode" />
+    </div>
 
     </div>
   );
