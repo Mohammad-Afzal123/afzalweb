@@ -7,6 +7,8 @@ import Card from './Card';
 import GlassCursor from './GlassCursor';
 import { VideoText } from './VideoText';
 import Spline from '@splinetool/react-spline';
+import LiquidScroll from './LiquidScroll'; // 👈 Import it
+
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -19,9 +21,16 @@ export default function App() {
 
   return (
     <div className="App">
-      {/* 🔹 Background video */}
       <GlassCursor />
+      
+      {/* 🔷 Top Spline Section */}
+      <div style={{ width: '100vw', height: '100vh' }}>
+        <Spline scene="https://prod.spline.design/x8pviGljQ1dRsMWf/scene.splinecode" />
+      </div>
 
+      {/* 🔷 Add Liquid Scroll Transition Here */}
+
+      {/* 🔷 Background Video Section */}
       <video
         className="hero-video"
         autoPlay
@@ -35,16 +44,16 @@ export default function App() {
         />
       </video>
 
-      {/* 🔹 Main 3D scene or content */}
+      {/* 🔷 3D Scene Content */}
       <div className="content">
         <ThreeScene />
         <hr className="separator" />
       </div>
-      <br />
+
       <MemoryCarousel />
-      <br />
-      <Card/>
-      <br></br>
+      <Card />
+
+      {/* 🔷 Final VideoText */}
       <video
         className="hero-video"
         autoPlay
@@ -58,32 +67,12 @@ export default function App() {
         />
         Your browser does not support the video tag.
       </video>
-        <div className="w-full flex justify-center items-center py-10">
-      <div className="w-[80px] h-[40px]">
+
+      <div className="sera-ui-video-text">
         <VideoText
-          src="https://ls29t3z55w.ufs.sh/f/JEKFIJDsOBct0vrmLYJRG8BKHmvZQkWJ9ElIVcNfzPg63Mbo"
-          fontFamily="Helvetica, Arial, sans-serif"
-          fontSize={200}
-          letterSpacing="0.03em"
-          textTransform="uppercase"
-          fontWeight="bold"
-          sources={[
-            { src: "fallback.webm", type: "video/webm" },
-            { src: "fallback.ogv", type: "video/ogg" },
-          ]}
-          onVideoLoad={() => console.log("Video loaded")}
-          onVideoError={(err) => console.error("Video error", err)}
-        >
-          Sera UI
-        </VideoText>
+          src="https://github.com/Mohammad-Afzal123/ACM-WDraft/raw/refs/heads/main/vecteezy_glowing-blue-neon-reflection-tech-tunnel-corridor-space-dj-loop_2020121%20(1)%20(1).mp4"
+        />
       </div>
-    </div>
-
-      <br></br>
-      <div style={{ width: '100vw', height: '100vh' }}>
-      <Spline scene="https://prod.spline.design/x8pviGljQ1dRsMWf/scene.splinecode" />
-    </div>
-
     </div>
   );
 }
