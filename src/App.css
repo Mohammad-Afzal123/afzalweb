@@ -1,4 +1,4 @@
-/* 🔧 Global Reset & Layout Fixes */
+/* ================= RESET ================= */
 
 * {
   margin: 0;
@@ -6,193 +6,105 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
-  font-family: Arial, sans-serif;
+  height: 100%;
+  background: #000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   cursor: none;
+  overflow-x: hidden;
 }
+
+/* ================= APP ROOT ================= */
 
 .App {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative; /* Establish a stacking context for child elements */
-}
-
-/* 🎥 Video Background Section */
-.video-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  max-width: 100vw;
-  z-index: -1;
-}
+/* ================= LOADER ================= */
 
-.overlay-content {
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-  padding-top: 3vh;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.overlay-content h1 {
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-.overlay-content p {
-  font-size: 1.5rem;
-  margin-top: 1rem;
-}
-
-/* 🧊 Three.js Scene Section */
-.three-section {
-  width: 100%;
-  padding: 2rem 1rem;
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* 🖱️ Animation Button */
-.three-controls {
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.three-controls button {
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.three-controls button:hover {
-  background-color: #0056b3;
-}
-
-/* 🧱 Canvas Container */
-.three-canvas {
-  width: 100%;
-  max-width: 800px;
-  height: 500px;
-}
-/* 🔹 Preloader container with full black background */
 .logo-loader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
+  inset: 0;
+  background: black;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 
-/* 🔹 Centered preloader video at 50% size */
 .logo-video-centered {
-  width: 50vw;
+  width: 40vw;
+  max-width: 420px;
   height: auto;
-  max-height: 80vh;
   object-fit: contain;
 }
-.separator {
-  margin-top: 20px;
-  border: none;
-  height: 2px;
-  background: linear-gradient(to right, #9d00ff, #00e5ff);
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.sera-ui-video-text {
+
+/* ================= PINNED VISUAL LAYER ================= */
+
+.pin-container {
   position: relative;
+  height: 120vh; /* shortened so visuals end early */
   width: 100%;
-  z-index: 20;
+}
+
+.spline-container {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================= PARTICLES ================= */
+
+#tsparticles {
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
-
-.sera-ui-video-text video {
-  width: 100%;
-  height: 100%;
-}
-
-/* Scroll Pinning */
-.pin-container {
-  height: calc(100vh + 500px); /* Viewport height + scroll duration */
-  position: relative;
-  width: 100%;
-}
-
-.scroll-content {
-  position: relative;
-}
-/* Wave Fill Animation */
-.spline-container {
-  width: 100vw;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-}
+/* ================= WAVE + WATER ================= */
 
 .wave-fill {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
-}
-
-.wave-fill span {
-  display: block;
-  width: 100%;
+  z-index: 1;
 }
 
 .water {
   position: absolute;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  bottom: 0;
+  height: 60%; /* 🔴 key fix */
+  background: linear-gradient(
+    to bottom right,
+    #020617,
+    #0f172a,
+    #000000
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .wave {
-  height: 60px;
-  background-image: url('/wave.png');
-  background-repeat: repeat-x;
-  background-size: 1000px 60px;
-  animation: wave-move 10s linear infinite;
   position: absolute;
   top: -59px;
   left: 0;
-}
-
-.deep-water {
-  height: 100%;
-  background: rgb(4, 103, 246);
+  width: 100%;
+  height: 60px;
+  background-image: url("/wave.png");
+  background-repeat: repeat-x;
+  background-size: 1000px 60px;
+  animation: wave-move 10s linear infinite;
 }
 
 @keyframes wave-move {
@@ -202,4 +114,147 @@ html, body, #root {
   to {
     background-position-x: 1000px;
   }
+}
+
+/* ================= CONTENT LAYER ================= */
+
+.content-layer {
+  position: relative;
+  z-index: 20; /* ABOVE spline + wave */
+  background: transparent;
+}
+
+/* ================= BLUE BENTO SECTION ================= */
+
+.blue-bento-section {
+  position: relative;
+  z-index: 20;
+  min-height: 100vh;
+  padding: 4rem 3rem;
+  background: linear-gradient(
+    135deg,
+    #020617,
+    #0b1f4d,
+    #020617
+  );
+}
+.blue-card span {
+  color: #dbeafe;   /* soft light blue */
+}
+
+.blue-bento-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .blue-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= BENTO CARDS ================= */
+
+.blue-card {
+  background: linear-gradient(
+    180deg,
+    rgba(37, 99, 235, 0.35),
+    rgba(2, 6, 23, 0.85)
+  );
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  border-radius: 26px;
+  padding: 2.5rem;
+  backdrop-filter: blur(14px);
+}
+
+
+/* ================= IMAGE ================= */
+
+.blue-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+.blue-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.blue-subtitle {
+  color: #93c5fd;
+  max-width: 520px;
+  margin-top: 1rem;
+}
+
+/* ================= CARDS SECTION ================= */
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  flex-wrap: wrap;
+  background: black;
+}
+
+/* ================= VIDEO ================= */
+
+.hero-video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================= THREE.JS ================= */
+
+.three-section {
+  width: 100%;
+  padding: 3rem 1rem;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.three-canvas {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+}
+
+/* ================= SEPARATOR ================= */
+
+.separator {
+  margin: 2rem auto;
+  border: none;
+  height: 2px;
+  width: 80%;
+  background: linear-gradient(to right, #2563eb, #0ea5e9);
+}
+
+/* ================= BUTTONS ================= */
+
+.futuristic-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+
+.futuristic-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
 }

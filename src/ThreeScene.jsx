@@ -23,10 +23,29 @@ export default function ThreeScene() {
 
   return (
     <div className="three-wrapper">
-      {/* 🔘 Button Section */}
-      <section className="three-controls">
-        <button onClick={() => setAnimation('Armature|mixamo.com|Layer0')}>RUN</button>
-      </section>
+      {/* 🔘 Card to trigger animation on hover */}
+      <div
+        onMouseEnter={() => setAnimation('Armature|mixamo.com|Layer0')}
+        onMouseLeave={() => setAnimation('Idle')}
+        style={{
+          padding: '20px 40px',
+          background: 'rgba(25, 118, 210, 0.3)',
+          borderRadius: '15px',
+          border: '1px solid rgba(25, 118, 210, 0.5)',
+          backdropFilter: 'blur(10px)',
+          cursor: 'pointer',
+          textAlign: 'center',
+          color: 'white',
+          margin: '20px auto',
+          width: 'fit-content',
+          fontFamily: 'sans-serif',
+          fontSize: '16px',
+          userSelect: 'none',
+          transition: 'background 0.3s',
+        }}
+      >
+        Hover to Run
+      </div>
 
       {/* 🧊 Canvas Section */}
       <section className="three-canvas">
