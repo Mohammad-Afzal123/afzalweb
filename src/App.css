@@ -13,248 +13,107 @@ body,
   height: 100%;
   background: #000;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  cursor: none;
   overflow-x: hidden;
 }
 
-/* ================= APP ROOT ================= */
+/* ================= APP ================= */
 
-.App {
+.app {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  min-height: 200vh;
 }
 
-/* ================= LOADER ================= */
+/* ================= FIXED SPLINE BACKGROUND ================= */
 
-.logo-loader {
+.spline-fixed {
   position: fixed;
   inset: 0;
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.logo-video-centered {
-  width: 40vw;
-  max-width: 420px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* ================= PINNED VISUAL LAYER ================= */
-
-.pin-container {
-  position: relative;
-  height: 120vh; /* shortened so visuals end early */
-  width: 100%;
-}
-
-.spline-container {
-  position: sticky;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
   z-index: 0;
-}
-
-/* ================= PARTICLES ================= */
-
-#tsparticles {
-  position: absolute !important;
-  inset: 0;
-  z-index: 1;
   pointer-events: none;
 }
 
-/* ================= WAVE + WATER ================= */
+/* ================= SCROLLING FOREGROUND ================= */
 
-.wave-fill {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
+.foreground {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-top: calc(100vh - 180px); /* lifted higher */
 }
 
-.water {
+/* =========================================================
+   SINGLE DARK-BLUE MOVING WAVE (CLEAN)
+   ========================================================= */
+
+.wave-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 260px;
+  overflow: hidden;
+}
+
+/* Single filled wave body */
+.wave {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 60%; /* 🔴 key fix */
-  background: linear-gradient(
-    to bottom right,
-    #020617,
-    #0f172a,
-    #000000
-  );
-  z-index: 1;
-  pointer-events: none;
-}
+  width: 200%;
+  height: 260px;
 
-.wave {
-  position: absolute;
-  top: -59px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-image: url("/wave.png");
+  /* Filled sine-wave geometry */
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 260' preserveAspectRatio='none'>\
+<path d='M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,260 L0,260 Z' fill='%23020617'/>\
+</svg>");
+
   background-repeat: repeat-x;
-  background-size: 1000px 60px;
-  animation: wave-move 10s linear infinite;
+  background-size: 1440px 260px;
+
+  animation: wave-drift 16s linear infinite;
 }
 
-@keyframes wave-move {
+/* ================= WAVE MOTION ================= */
+
+@keyframes wave-drift {
   from {
-    background-position-x: 0;
+    transform: translateX(0);
   }
   to {
-    background-position-x: 1000px;
+    transform: translateX(-50%);
   }
 }
 
-/* ================= CONTENT LAYER ================= */
+/* =========================================================
+   CONTENT SECTIONS (FULL WIDTH)
+   ========================================================= */
 
-.content-layer {
-  position: relative;
-  z-index: 20; /* ABOVE spline + wave */
-  background: transparent;
-}
-
-/* ================= BLUE BENTO SECTION ================= */
-
-.blue-bento-section {
-  position: relative;
-  z-index: 20;
+.content-section {
+  width: 100vw;
   min-height: 100vh;
-  padding: 4rem 3rem;
-  background: linear-gradient(
-    135deg,
-    #020617,
-    #0b1f4d,
-    #020617
-  );
-}
-.blue-card span {
-  color: #dbeafe;   /* soft light blue */
+  padding: 6rem 4rem;
+  background: #020617;
+  color: #f8fafc;
 }
 
-.blue-bento-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1.5rem;
-}
-
-@media (max-width: 900px) {
-  .blue-bento-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ================= BENTO CARDS ================= */
-
-.blue-card {
-  background: linear-gradient(
-    180deg,
-    rgba(37, 99, 235, 0.35),
-    rgba(2, 6, 23, 0.85)
-  );
-  border: 1px solid rgba(147, 197, 253, 0.35);
-  border-radius: 26px;
-  padding: 2.5rem;
-  backdrop-filter: blur(14px);
-}
-
-
-/* ================= IMAGE ================= */
-
-.blue-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  object-fit: cover;
+.content-section.darker {
+  background: #000;
 }
 
 /* ================= TYPOGRAPHY ================= */
 
-.blue-title {
+h1 {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 600;
-  color: #f8fafc;
+  margin-bottom: 1rem;
 }
 
-.blue-subtitle {
-  color: #93c5fd;
-  max-width: 520px;
-  margin-top: 1rem;
+h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 500;
 }
 
-/* ================= CARDS SECTION ================= */
-
-.cards-container {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 4rem 2rem;
-  flex-wrap: wrap;
-  background: black;
-}
-
-/* ================= VIDEO ================= */
-
-.hero-video {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  display: block;
-}
-
-/* ================= THREE.JS ================= */
-
-.three-section {
-  width: 100%;
-  padding: 3rem 1rem;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.three-canvas {
-  width: 100%;
-  max-width: 900px;
-  height: 500px;
-}
-
-/* ================= SEPARATOR ================= */
-
-.separator {
-  margin: 2rem auto;
-  border: none;
-  height: 2px;
-  width: 80%;
-  background: linear-gradient(to right, #2563eb, #0ea5e9);
-}
-
-/* ================= BUTTONS ================= */
-
-.futuristic-button {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  letter-spacing: 1px;
-  backdrop-filter: blur(6px);
-  transition: all 0.3s ease;
-}
-
-.futuristic-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+p {
+  max-width: 720px;
+  line-height: 1.6;
+  color: #cbd5f5;
 }
