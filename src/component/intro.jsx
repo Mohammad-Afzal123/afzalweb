@@ -15,13 +15,12 @@ export default function Intro() {
   return (
     <section
       style={{
-        position: "relative",
-        zIndex: 10,
-        transform: "translateY(-140px)", // overlap wave
-        padding: "0 3rem",
+        minHeight: "100vh",
+        padding: "2rem 3rem",
+        background: "#020617",
       }}
     >
-      {/* ================= HEADER BAR ================= */}
+      {/* ================= HEADER ================= */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -37,7 +36,7 @@ export default function Intro() {
           border: "1px solid rgba(147,197,253,0.25)",
         }}
       >
-        <h1 style={{ letterSpacing: "0.18em" }}>JULIA HUANG</h1>
+        <h1 style={{ letterSpacing: "0.18em", margin: 0 }}>JULIA HUANG</h1>
         <nav style={{ display: "flex", gap: "2rem", opacity: 0.9 }}>
           <span>PROJECTS</span>
           <span>ABOUT</span>
@@ -45,85 +44,63 @@ export default function Intro() {
         </nav>
       </motion.div>
 
-      {/* ================= BENTO GRID ================= */}
+      {/* ================= MAIN GRID ================= */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "2.2fr 1.3fr",
-          gap: "2rem",
+          gridTemplateColumns: "45% 25% 30%",
+          gap: "1.25rem",
+          alignItems: "start",
         }}
       >
-        {/* ================= LEFT LARGE COLUMN ================= */}
+        {/* ================= COLUMN 1: HERO & ABOUT ================= */}
         <div
           style={{
-            display: "grid",
-            gridTemplateRows: "2fr 1fr",
-            gap: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.25rem",
           }}
         >
-          {/* HERO CARD */}
+          {/* HERO */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             style={{
-              background:
-                "linear-gradient(180deg, #1e3a8a, #020617)",
+              background: "linear-gradient(180deg, #1e3a8a, #020617)",
               borderRadius: "26px",
               padding: "3rem",
               border: "1px solid rgba(147,197,253,0.25)",
-              boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+              minHeight: "380px",
             }}
           >
-            <h2
-              style={{
-                fontSize: "3.2rem",
-                lineHeight: 1.1,
-                marginBottom: "1.2rem",
-              }}
-            >
+            <h2 style={{ fontSize: "3.2rem", lineHeight: 1.1, margin: 0 }}>
               Artist Redefining <br />
               Architecture with <br />
               AI-Driven Design
             </h2>
-
-            <p
-              style={{
-                maxWidth: "520px",
-                color: "#c7d2fe",
-                lineHeight: 1.6,
-              }}
-            >
+            <p style={{ color: "#c7d2fe", maxWidth: "520px", marginTop: "1.5rem", marginBottom: 0 }}>
               Blending artificial intelligence with modern architectural
               expression to create immersive digital experiences.
             </p>
-
-            <div
-              style={{
-                marginTop: "2.2rem",
-                color: "#60a5fa",
-                fontWeight: 500,
-                cursor: "pointer",
-              }}
-            >
-              Let’s Talk ↗
-            </div>
           </motion.div>
 
-          {/* ABOUT CARD */}
+          {/* ABOUT */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             style={{
-              background:
-                "linear-gradient(180deg, #020b2a, #020617)",
+              background: "linear-gradient(180deg, #020b2a, #020617)",
               borderRadius: "26px",
-              padding: "2.2rem",
+              padding: "2.5rem",
               border: "1px solid rgba(147,197,253,0.2)",
+              display: "flex",
+              alignItems: "center",
+              minHeight: "280px",
             }}
           >
-            <p style={{ color: "#c7d2fe", lineHeight: 1.6 }}>
+            <p style={{ color: "#c7d2fe", lineHeight: 1.6, margin: 0 }}>
               Julia Huang is an innovative AI artist, blending cutting-edge
               technology with expressive design. Based in LA, her work explores
               intelligence, form, and digital identity.
@@ -131,25 +108,26 @@ export default function Intro() {
           </motion.div>
         </div>
 
-        {/* ================= RIGHT COLUMN ================= */}
+        {/* ================= COLUMN 2: PORTRAIT & CONTACT ================= */}
         <div
           style={{
-            display: "grid",
-            gridTemplateRows: "1.4fr 1fr 0.5fr",
-            gap: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.25rem",
           }}
         >
-          {/* IMAGE CARD */}
+          {/* PORTRAIT */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             style={{
-              background:
-                "linear-gradient(180deg, #020b2a, #020617)",
+              background: "linear-gradient(180deg, #020b2a, #020617)",
               borderRadius: "26px",
               padding: "1rem",
               border: "1px solid rgba(147,197,253,0.25)",
+              overflow: "hidden",
+              height: "380px",
             }}
           >
             <img
@@ -164,53 +142,72 @@ export default function Intro() {
             />
           </motion.div>
 
-          {/* PROJECT LIST CARD */}
+          {/* CONTACT */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
             style={{
-              background:
-                "linear-gradient(180deg, #020b2a, #020617)",
+              background: "linear-gradient(180deg, #1d4ed8, #1e40af)",
               borderRadius: "26px",
-              padding: "2rem",
-              border: "1px solid rgba(147,197,253,0.2)",
-            }}
-          >
-            <h3 style={{ marginBottom: "1rem" }}>Selected Projects</h3>
-            <ul
-              style={{
-                listStyle: "none",
-                padding: 0,
-                lineHeight: "2.4rem",
-                color: "#c7d2fe",
-              }}
-            >
-              <li>Elara ↗</li>
-              <li>Verve ↗</li>
-              <li>Zephyr ↗</li>
-            </ul>
-          </motion.div>
-
-          {/* CTA CARD */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            style={{
-              background:
-                "linear-gradient(180deg, #1d4ed8, #1e40af)",
-              borderRadius: "26px",
-              padding: "2rem",
+              padding: "2.5rem",
               color: "#f8fafc",
-              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              border: "1px solid rgba(147,197,253,0.2)",
+              minHeight: "280px",
             }}
           >
-            <p style={{ opacity: 0.9 }}>Have some questions?</p>
-            <h3 style={{ marginTop: "0.6rem" }}>Contact me ↗</h3>
+            <p style={{ opacity: 0.9, fontSize: "0.95rem", margin: 0 }}>Have some questions?</p>
+            <h3 style={{ marginTop: "0.6rem", fontSize: "1.8rem", margin: "0.6rem 0 0 0" }}>Contact me ↗</h3>
           </motion.div>
         </div>
+
+        {/* ================= COLUMN 3: SELECTED PROJECTS ================= */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          style={{
+            background: "linear-gradient(180deg, #020b2a, #020617)",
+            borderRadius: "26px",
+            padding: "2.5rem",
+            border: "1px solid rgba(147,197,253,0.2)",
+            height: "100%",
+          }}
+        >
+          <h3 style={{ marginBottom: "1.5rem", fontSize: "1.5rem", marginTop: 0 }}>Selected Projects</h3>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0, color: "#c7d2fe", lineHeight: 2.5 }}>
+            <li style={{ cursor: "pointer", fontSize: "1.1rem" }}>Elara ↗</li>
+            <li style={{ cursor: "pointer", fontSize: "1.1rem" }}>Verve ↗</li>
+            <li style={{ cursor: "pointer", fontSize: "1.1rem" }}>Zephyr ↗</li>
+          </ul>
+        </motion.div>
       </div>
+
+      {/* ================= SOCIAL MEDIA BAR ================= */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
+        style={{
+          background: "linear-gradient(90deg, #0b1f4d, #020617)",
+          borderRadius: "18px",
+          padding: "1.5rem 2rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "3rem",
+          marginTop: "2.5rem",
+          border: "1px solid rgba(147,197,253,0.25)",
+        }}
+      >
+        <a href="#" style={{ color: "#c7d2fe", textDecoration: "none", fontSize: "1.1rem", transition: "color 0.3s", cursor: "pointer" }}>LinkedIn</a>
+        <a href="#" style={{ color: "#c7d2fe", textDecoration: "none", fontSize: "1.1rem", transition: "color 0.3s", cursor: "pointer" }}>GitHub</a>
+        <a href="#" style={{ color: "#c7d2fe", textDecoration: "none", fontSize: "1.1rem", transition: "color 0.3s", cursor: "pointer" }}>Facebook</a>
+        <a href="#" style={{ color: "#c7d2fe", textDecoration: "none", fontSize: "1.1rem", transition: "color 0.3s", cursor: "pointer" }}>Instagram</a>
+      </motion.div>
     </section>
   );
 }

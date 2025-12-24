@@ -1,0 +1,15 @@
+.logo-loader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Increased size */
+.logo-video-centered {
+  width: min(60vw, 520px); /* responsive + large */
+  height: auto;
+}
