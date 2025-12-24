@@ -7,7 +7,7 @@ import Intro from "./component/intro";
 import ThreeScene from "./component/ThreeScene";
 import GlassCursor from "./component/GlassCursor";
 import LogoLoader from "./component/LogoLoader";
-
+import Card from "./component/Card.jsx";
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
 
@@ -45,6 +45,7 @@ export default function App() {
         <section className="content-section darker">
           <ThreeScene />
           <MemoryCarousel />
+          <Card/>
         </section>
       </div>
     </div>
