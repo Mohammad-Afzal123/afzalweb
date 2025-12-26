@@ -20,7 +20,7 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 
 /* ===== PUBLIC ASSET PATHS ===== */
 const CARD_GLB_PATH = '/card.glb';
-const LANYARD_TEXTURE_PATH = '/lanyard.png';
+const LANYARD_TEXTURE_PATH = '/Lanyard.png';
 
 export default function Lanyard({
   position = [0, 0, 30],
