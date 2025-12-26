@@ -1,0 +1,55 @@
+/* FULL VIEWPORT WIDTH */
+.tech-glass-viewport {
+  position: relative;
+  width: 100vw;
+  height: 120px;
+  overflow: hidden;
+  margin: 4rem 0;
+}
+
+/* MOVING LOGOS (FULL WIDTH) */
+.logo-marquee {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  height: 100%;
+  width: max-content;
+
+  animation: marquee-slide 35s linear infinite;
+}
+
+.logo-track img {
+  height: 52px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* CENTERED GLASS */
+.glass-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* INFINITE MOTION */
+@keyframes marquee-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}

@@ -7,8 +7,9 @@ import Intro from "./component/intro";
 import ThreeScene from "./component/ThreeScene";
 import GlassCursor from "./component/GlassCursor";
 import LogoLoader from "./component/LogoLoader";
+import ProjectsWithLanyard from "./component/ProjectsWithLanyard";
 import Card from "./component/Card.jsx";
-import Lanyard from "./component/Lanyard.jsx";
+import TechLogoGlassGallery from "./component/TechLogoGlassGallery";
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
 
@@ -40,14 +41,20 @@ export default function App() {
         </div>
 
         <section className="content-section">
+           <div className="ambient-bg">
           <Intro />
+          </div>
         </section>
 
         <section className="content-section darker">
+          <div className="ambient-bg dark">
           <ThreeScene />
           <MemoryCarousel />
           <Card/>
           
+          <ProjectsWithLanyard />
+          <TechLogoGlassGallery />
+          </div>
         </section>
       </div>
     </div>

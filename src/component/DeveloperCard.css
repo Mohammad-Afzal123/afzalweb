@@ -1,0 +1,104 @@
+.dev-card {
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid rgba(27, 44, 104, 0.63);
+  background: linear-gradient(to right, #0d1224, #0a0d37);
+  color: #ffffff;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  overflow: hidden;
+}
+
+/* top glow line */
+.dev-card-top-line {
+  display: flex;
+}
+
+.dev-card-top-line span {
+  height: 1px;
+  width: 50%;
+}
+
+.dev-card-top-line span:first-child {
+  background: linear-gradient(to right, transparent, #ec4899, #8b5cf6);
+}
+
+.dev-card-top-line span:last-child {
+  background: linear-gradient(to right, #8b5cf6, transparent);
+}
+
+/* header */
+.dev-card-header {
+  display: flex;
+  gap: 8px;
+  padding: 16px 24px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red {
+  background: #f87171;
+}
+.orange {
+  background: #fb923c;
+}
+.green {
+  background: #86efac;
+}
+
+/* body */
+.dev-card-body {
+  border-top: 2px solid #1e3a8a;
+  padding: 20px 24px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+code {
+  white-space: pre-wrap;
+}
+
+/* syntax colors */
+.kw {
+  color: #ec4899;
+}
+
+.var {
+  color: #ffffff;
+}
+
+.key {
+  color: #ffffff;
+}
+
+.str {
+  color: #fbbf24;
+}
+
+.num {
+  color: #fb923c;
+}
+
+.fn {
+  color: #4ade80;
+}
+
+.bool {
+  color: #ffffff;
+}
+
+.br {
+  color: #9ca3af;
+}
+
+/* indentation */
+.indent-1 {
+  padding-left: 24px;
+}
+
+.indent-2 {
+  padding-left: 48px;
+}
