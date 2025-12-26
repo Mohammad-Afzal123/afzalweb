@@ -8,6 +8,7 @@ import ThreeScene from "./component/ThreeScene";
 import GlassCursor from "./component/GlassCursor";
 import LogoLoader from "./component/LogoLoader";
 import Card from "./component/Card.jsx";
+import Lanyard from "./component/Lanyard.jsx";
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
 
@@ -46,6 +47,7 @@ export default function App() {
           <ThreeScene />
           <MemoryCarousel />
           <Card/>
+          
         </section>
       </div>
     </div>

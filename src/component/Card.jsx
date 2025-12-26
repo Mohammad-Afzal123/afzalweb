@@ -49,7 +49,7 @@ const StyledWrapper = styled.div`
   }
 
   .content-box {
-    background: rgba(4, 193, 250, 0.732);
+    background: rgba(143, 4, 250, 0.73);
     /* border-radius: 10px 100px 10px 10px; */
     transition: all 0.5s ease-in-out;
     padding: 60px 25px 25px 25px;
@@ -89,7 +89,7 @@ const StyledWrapper = styled.div`
     font-weight: 900;
     font-size: 9px;
     text-transform: uppercase;
-    color: rgb(7, 185, 255);
+    color: rgba(143, 4, 250);
     /* border-radius: 5px; */
     background: white;
     padding: 0.5rem 0.7rem;
@@ -108,7 +108,7 @@ const StyledWrapper = styled.div`
     height: 60px;
     width: 60px;
     background: white;
-    border: 1px solid rgb(7, 185, 255);
+    border: 1px solid rgba(143, 4, 250);
     /* border-radius: 10px; */
     padding: 10px;
     transform: translate3d(0px, 0px, 80px);
@@ -121,7 +121,7 @@ const StyledWrapper = styled.div`
   }
 
   .date-box .month {
-    color: rgb(4, 193, 250);
+    color: rgba(143, 4, 250);
     font-size: 9px;
     font-weight: 700;
   }
@@ -129,7 +129,7 @@ const StyledWrapper = styled.div`
   .date-box .date {
     font-size: 20px;
     font-weight: 900;
-    color: rgb(4, 193, 250);
+    color: rgba(143, 4, 250);
   }`;
 
 export default Card;
