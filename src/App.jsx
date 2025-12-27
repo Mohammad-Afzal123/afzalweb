@@ -58,9 +58,13 @@ export default function App() {
             <ThreeScene />
             <MemoryCarousel />
             <ProjectsWithLanyard />
+            
+            
+            
             <Card />
           </div>
         </section>
+        
       </div>
     </div>
   );

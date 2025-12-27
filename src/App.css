@@ -1,5 +1,4 @@
-/* ================= RESET ================= */
-
+/* ================= RESET & BASE ================= */
 * {
   margin: 0;
   padding: 0;
@@ -14,17 +13,17 @@ body,
   background: #000;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
+  color: #f8fafc;
 }
 
-/* ================= APP ================= */
-
+/* ================= APP CONTAINER ================= */
 .app {
   position: relative;
   min-height: 200vh;
+  background: #000;
 }
 
 /* ================= FIXED SPLINE BACKGROUND ================= */
-
 .spline-fixed {
   position: fixed;
   inset: 0;
@@ -33,218 +32,68 @@ body,
 }
 
 /* ================= SCROLLING FOREGROUND ================= */
-
 .foreground {
   position: relative;
-  z-index: 2;
+  z-index: 10; /* Ensures foreground stays above Spline */
   width: 100%;
-  margin-top: calc(100vh - 180px); /* lifted higher */
+  margin-top: calc(100vh - 180px);
 }
 
-/* =========================================================
-   SINGLE DARK-BLUE MOVING WAVE (CLEAN)
-   ========================================================= */
-
+/* ================= WAVE SYSTEM ================= */
 .wave-wrapper {
   position: relative;
   width: 100%;
   height: 260px;
   overflow: hidden;
+  z-index: 15;
 }
 
-/* Single filled wave body */
 .wave {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 200%;
   height: 260px;
-
-  /* Filled sine-wave geometry */
-  background-image: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 260' preserveAspectRatio='none'>\
-<path d='M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,260 L0,260 Z' fill='%23020617'/>\
-</svg>");
-
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 260' preserveAspectRatio='none'><path d='M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,260 L0,260 Z' fill='%23020617'/></svg>");
   background-repeat: repeat-x;
   background-size: 1440px 260px;
-
   animation: wave-drift 16s linear infinite;
 }
 
-/* ================= WAVE MOTION ================= */
-
 @keyframes wave-drift {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-/* =========================================================
-   CONTENT SECTIONS (FULL WIDTH)
-   ========================================================= */
-
-.content-section {
-  width: 100%;
-  min-height: 100vh;
-  padding: 6rem 4rem;
-  background: #020617;
-  color: #f8fafc;
-}
-
-.content-section.darker {
-  background: #000;
-}
-
-/* ================= TYPOGRAPHY ================= */
-
-h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 500;
-}
-
-p {
-  max-width: 720px;
-  line-height: 1.6;
-  color: #cbd5f5;
-}
-/* ================= THREE SCENE LAYOUT ================= */
-
-.three-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  width: 100%;
-  min-height: 100vh;
-  padding: 4rem;
-}
-
-/* ================= CANVAS ================= */
-
-.three-canvas {
-  width: 520px;
-  height: 520px;
-  border-radius: 22px;
-  overflow: hidden;
-
-  background: #020617;
-  border: 1px solid rgba(148, 163, 184, 0.15);
-}
-
-/* ================= RIGHT PANEL (MATCHES CANVAS SIZE) ================= */
-
-.hover-panel {
-  width: 520px;
-  height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ================= HOVER CARD ================= */
-
-.hover-card {
-  width: 100%;
-  height: 100%;
-  border-radius: 22px;
-  padding: 3rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background: linear-gradient(
-    145deg,
-    #020617,
-    #020617,
-    #0f172a
-  );
-
-  border: 1px solid rgba(59, 130, 246, 0.35);
-  box-shadow:
-    0 0 40px rgba(59, 130, 246, 0.25),
-    inset 0 0 30px rgba(59, 130, 246, 0.12);
-
-  color: #e5e7eb;
-  cursor: pointer;
-  transition: all 0.35s ease;
-  text-align: center;
-}
-
-.hover-card h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #93c5fd;
-}
-
-.hover-card p {
-  font-size: 1.05rem;
-  color: #cbd5f5;
-}
-
-.hover-card:hover {
-  transform: scale(1.04);
-  box-shadow:
-    0 0 60px rgba(59, 130, 246, 0.45),
-    inset 0 0 40px rgba(59, 130, 246, 0.18);
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 1000px) {
-  .three-wrapper {
-    flex-direction: column;
-  }
-
-  .three-canvas,
-  .hover-panel {
-    width: 100%;
-    height: 420px;
-  }
-}
-/* ================= LIVE BACKGROUND SYSTEM ================= */
-
+/* ================= LIVE BACKGROUND IMAGE ================= */
 .live-bg-container {
-  position: absolute; /* Relative to .foreground */
-  top: 260px; /* Starts exactly where the Wave finishes */
+  position: absolute;
+  top: 260px;
   left: 0;
   width: 100%;
   height: calc(100% - 260px);
-  z-index: -3; /* Lowest layer in foreground */
+  z-index: -3; /* Behind content but in front of Spline */
   overflow: hidden;
 }
 
 .live-bg-image {
   position: absolute;
-  inset: -10%; /* Extra size for the animation movement */
+  inset: -10%;
   background-image: url("http://googleusercontent.com/image_collection/image_retrieval/11597288178814383276_0");
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5) saturate(1.2);
-  /* Cinematic slow pan and zoom */
+  filter: brightness(0.4) saturate(1.2);
   animation: bg-pan-zoom 40s ease-in-out infinite alternate;
 }
 
 .live-bg-overlay {
   position: absolute;
   inset: 0;
-  /* Deep blue gradient to blend with the Wave color #020617 */
   background: linear-gradient(
     to bottom,
     #020617 0%,
     transparent 15%,
-    rgba(0, 0, 0, 0.4) 85%,
+    rgba(0, 0, 0, 0.6) 85%,
     #000 100%
   );
 }
@@ -255,44 +104,104 @@ p {
   100% { transform: scale(1.05) translate(2%, -2%); }
 }
 
-/* ================= MODIFIED CONTENT SECTIONS ================= */
-
+/* ================= CONTENT SECTIONS ================= */
 .content-section {
   width: 100%;
   min-height: 100vh;
   padding: 6rem 4rem;
-  /* Set to transparent/glass so the Live BG shows through */
   background: rgba(2, 6, 23, 0.35); 
   backdrop-filter: blur(8px);
-  color: #f8fafc;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 20;
 }
 
 .content-section.darker {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+  /* CRITICAL: Allow signature glow to spill outside container */
+  overflow: visible !important; 
 }
 
-/* ================= MODIFIED AMBIENT BUBBLES ================= */
-
-.ambient-bg::before {
-  /* Reduced opacity of the original radial gradients to favor the image */
-  opacity: 0.5;
-}
-
-.ambient-bg::after {
-  /* Twinkling effect added to particles */
-  animation: bubbles-rise 28s linear infinite, particle-flicker 4s ease-in-out infinite alternate;
-}
-
-@keyframes particle-flicker {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.8; }
-}
-
-/* Ensure the foreground container handles the height properly */
-.foreground {
+/* ================= AMBIENT EFFECTS ================= */
+.ambient-bg {
   position: relative;
-  z-index: 2;
   width: 100%;
-  margin-top: calc(100vh - 180px);
+  height: 100%;
+  overflow: visible !important;
+}
+
+.ambient-bg.dark {
+  z-index: 25;
+}
+
+/* ================= THREE SCENE LAYOUT ================= */
+.three-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem;
+}
+
+.three-canvas {
+  width: 520px;
+  height: 520px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.hover-panel {
+  width: 520px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hover-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(145deg, #020617, #020617, #0f172a);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.25);
+  transition: all 0.35s ease;
+  text-align: center;
+}
+
+.hover-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.45);
+}
+
+/* ================= TYPOGRAPHY ================= */
+h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600; margin-bottom: 1rem; }
+h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 500; }
+p { max-width: 720px; line-height: 1.6; color: #cbd5f5; }
+
+/* ================= SKILL SIGNATURE PIERCING FIX ================= */
+/* This ensures the signature sits on the absolute top 'glass' layer */
+.sig-outer-wrapper, 
+.scribble-root {
+  z-index: 99999 !important;
+  position: relative;
+  overflow: visible !important;
+  pointer-events: none;
+  /* Adds breathing room for the scroll trigger */
+  margin: 100px 0; 
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1000px) {
+  .three-wrapper { flex-direction: column; }
+  .three-canvas, .hover-panel { width: 100%; height: 420px; }
+  .content-section { padding: 4rem 1.5rem; }
 }

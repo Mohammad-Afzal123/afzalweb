@@ -1,14 +1,13 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
+import { motion } from 'framer-motion'; // Only used for scroll-revealing text
 import './intro.css';
 import SplitText from "./SplitText";
+
 /* ================= UTILS & CONSTANTS ================= */
-const GLOW_COLOR = '59, 130, 246'; // Blue theme
+const GLOW_COLOR = '59, 130, 246'; 
 const DEFAULT_PARTICLE_COUNT = 15;
-const SPOTLIGHT_RADIUS = 350;
-const handleAnimationComplete = () => {
-  console.log('All letters have animated!');
-};
+
 const createParticleElement = (x, y) => {
   const el = document.createElement('div');
   el.className = 'particle';
@@ -20,41 +19,43 @@ const createParticleElement = (x, y) => {
   return el;
 };
 
+// Scroll Animation Settings
+const scrollFadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+  }
+};
+
+const staggerContainer = {
+  visible: { transition: { staggerChildren: 0.1 } }
+};
+
 /* ================= COMPONENTS ================= */
 
 const GlobalSpotlight = ({ gridRef }) => {
   const spotlightRef = useRef(null);
-
   useEffect(() => {
     const spotlight = document.createElement('div');
     spotlight.className = 'global-spotlight';
     document.body.appendChild(spotlight);
     spotlightRef.current = spotlight;
-
     const handleMouseMove = (e) => {
       if (!gridRef.current) return;
       const cards = gridRef.current.querySelectorAll('.magic-card');
-      
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
         card.style.setProperty('--glow-x', `${x}%`);
         card.style.setProperty('--glow-y', `${y}%`);
         card.style.setProperty('--glow-intensity', '1');
       });
-
-      gsap.to(spotlight, {
-        left: e.clientX, top: e.clientY,
-        duration: 0.1, ease: 'power2.out', opacity: 0.6
-      });
+      gsap.to(spotlight, { left: e.clientX, top: e.clientY, duration: 0.1, ease: 'power2.out', opacity: 0.6 });
     };
-
-    const handleMouseLeave = () => {
-      gsap.to(spotlight, { opacity: 0 });
-    };
-
+    const handleMouseLeave = () => { gsap.to(spotlight, { opacity: 0 }); };
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
     return () => {
@@ -63,7 +64,6 @@ const GlobalSpotlight = ({ gridRef }) => {
       spotlight.remove();
     };
   }, [gridRef]);
-
   return null;
 };
 
@@ -82,16 +82,11 @@ const MagicCard = ({ children, className = '', tilt = true, magnetism = true }) 
   const spawnParticles = useCallback(() => {
     if (!cardRef.current || !isHovered.current) return;
     const { width, height } = cardRef.current.getBoundingClientRect();
-    
     for (let i = 0; i < DEFAULT_PARTICLE_COUNT; i++) {
       const p = createParticleElement(Math.random() * width, Math.random() * height);
       cardRef.current.appendChild(p);
       particlesRef.current.push(p);
-
-      gsap.fromTo(p, { scale: 0, opacity: 0 }, { 
-        scale: 1, opacity: 1, duration: 0.5, delay: i * 0.05 
-      });
-
+      gsap.fromTo(p, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, delay: i * 0.05 });
       gsap.to(p, {
         x: "+=" + (Math.random() - 0.5) * 50,
         y: "+=" + (Math.random() - 0.5) * 50,
@@ -109,29 +104,15 @@ const MagicCard = ({ children, className = '', tilt = true, magnetism = true }) 
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-
       if (tilt) {
-        gsap.to(el, {
-          rotateX: ((y - centerY) / centerY) * -10,
-          rotateY: ((x - centerX) / centerX) * 10,
-          duration: 0.2, transformPerspective: 1000
-        });
+        gsap.to(el, { rotateX: ((y - centerY) / centerY) * -10, rotateY: ((x - centerX) / centerX) * 10, duration: 0.2, transformPerspective: 1000 });
       }
       if (magnetism) {
         gsap.to(el, { x: (x - centerX) * 0.05, y: (y - centerY) * 0.05, duration: 0.3 });
       }
     };
-
-    const handleEnter = () => { 
-      isHovered.current = true; 
-      spawnParticles(); 
-    };
-    const handleLeave = () => {
-      isHovered.current = false;
-      clearParticles();
-      gsap.to(el, { rotateX: 0, rotateY: 0, x: 0, y: 0, duration: 0.5 });
-    };
-
+    const handleEnter = () => { isHovered.current = true; spawnParticles(); };
+    const handleLeave = () => { isHovered.current = false; clearParticles(); gsap.to(el, { rotateX: 0, rotateY: 0, x: 0, y: 0, duration: 0.5 }); };
     el.addEventListener('mousemove', handleMove);
     el.addEventListener('mouseenter', handleEnter);
     el.addEventListener('mouseleave', handleLeave);
@@ -167,31 +148,34 @@ export default function Intro() {
       <div className="intro-container" ref={gridRef}>
         {/* HEADER */}
         <MagicCard className="intro-header">
-          <h1 className="intro-title">MOHAMMAD AFZAL KHAN</h1>
+          <motion.h1 
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollFadeUp}
+            className="intro-title"
+          >
+            MOHAMMAD AFZAL KHAN
+          </motion.h1>
           <nav className="intro-nav">
-  {/* The sliding background highlight */}
-  <div className="nav-glow-backdrop" id="nav-glow"></div>
-  
-  {["PROJECTS", "ABOUT", "CONTACT"].map((item, index) => (
-    <button 
-      key={item} 
-      className="nav-item"
-      onMouseEnter={(e) => {
-        const glow = document.getElementById('nav-glow');
-        glow.style.width = `${e.target.offsetWidth}px`;
-        glow.style.left = `${e.target.offsetLeft}px`;
-        glow.style.opacity = '1';
-      }}
-      onMouseLeave={() => {
-        const glow = document.getElementById('nav-glow');
-        glow.style.opacity = '0';
-      }}
-    >
-      <SplitText text={item} delay={30 + (index * 20)} immediate={true} />
-      <span className="nav-dot"></span>
-    </button>
-  ))}
-</nav>
+            <div className="nav-glow-backdrop" id="nav-glow"></div>
+            {["PROJECTS", "ABOUT", "CONTACT"].map((item, index) => (
+              <button 
+                key={item} 
+                className="nav-item"
+                onMouseEnter={(e) => {
+                  const glow = document.getElementById('nav-glow');
+                  glow.style.width = `${e.target.offsetWidth}px`;
+                  glow.style.left = `${e.target.offsetLeft}px`;
+                  glow.style.opacity = '1';
+                }}
+                onMouseLeave={() => {
+                  const glow = document.getElementById('nav-glow');
+                  glow.style.opacity = '0';
+                }}
+              >
+                <SplitText text={item} delay={30 + (index * 20)} immediate={true} />
+                <span className="nav-dot"></span>
+              </button>
+            ))}
+          </nav>
         </MagicCard>
 
         {/* MAIN GRID */}
@@ -199,19 +183,24 @@ export default function Intro() {
           <div className="intro-column">
             <MagicCard className="hero-card">
               <div className="floating-blob" />
-              <h2 className="hero-title">
-                <span className="text-line">CSE(Data Science)</span>
-                <span className="text-line">VIT Chennai</span>
-                <span className="text-line">AIML Developer</span>
-              </h2>
-              <p className="hero-description">Blending AI with modern architectural expression.</p>
+              <motion.h2 
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+                className="hero-title"
+              >
+                <motion.span variants={scrollFadeUp} className="text-line">CSE(Data Science)</motion.span>
+                <motion.span variants={scrollFadeUp} className="text-line">VIT Chennai</motion.span>
+                <motion.span variants={scrollFadeUp} className="text-line">AIML Developer</motion.span>
+              </motion.h2>
+              <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollFadeUp} className="hero-description">
+                Blending AI with modern architectural expression.
+              </motion.p>
             </MagicCard>
 
             <MagicCard className="about-card matched-height">
-              <p className="about-text">
+              <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollFadeUp} className="about-text">
                 An innovative AI developer blending cutting-edge technology with expressive design. 
                 Focused on intelligence, form, and digital identity.
-              </p>
+              </motion.p>
             </MagicCard>
           </div>
 
@@ -221,54 +210,52 @@ export default function Intro() {
             </MagicCard>
 
             <MagicCard className="contact-card matched-height highlight-blue">
-              <p className="contact-label">Have some questions?</p>
-              <h3 className="contact-title">Contact me ↗</h3>
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
+                <motion.p variants={scrollFadeUp} className="contact-label">Have some questions?</motion.p>
+                <motion.h3 variants={scrollFadeUp} className="contact-title">Contact me ↗</motion.h3>
+              </motion.div>
             </MagicCard>
           </div>
 
           <MagicCard className="projects-card">
-            <h3 className="projects-title">Selected Projects</h3>
-            <ul className="projects-list">
+            <motion.h3 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollFadeUp} className="projects-title">
+              Selected Projects
+            </motion.h3>
+            <motion.ul initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="projects-list">
               {["Elara ↗", "Verve ↗", "Zephyr ↗"].map(p => (
-                <li key={p} className="project-item">{p}</li>
+                <motion.li variants={scrollFadeUp} key={p} className="project-item">{p}</motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </MagicCard>
-          
         </div>
 
         {/* SOCIAL BAR */}
         <MagicCard className="social-bar">
-  <div className="social-links-container">
-    {["LinkedIn", "GitHub", "Instagram"].map((s, index) => (
-      <a 
-        key={s} 
-        href={`#${s}`} 
-        className="social-link-item"
-        onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          gsap.to(e.currentTarget, {
-            x: x * 0.3,
-            y: y * 0.3,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-        }}
-        onMouseLeave={(e) => {
-          gsap.to(e.currentTarget, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
-        }}
-      >
-        <div className="social-link-bg"></div>
-        <span className="social-link-text">
-          <SplitText text={s} delay={100 + (index * 50)} immediate={true} />
-        </span>
-        <div className="social-link-border"></div>
-      </a>
-    ))}
-  </div>
-</MagicCard>
+          <div className="social-links-container">
+            {["LinkedIn", "GitHub", "Instagram"].map((s, index) => (
+              <a 
+                key={s} 
+                href={`#${s}`} 
+                className="social-link-item"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  gsap.to(e.currentTarget, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: "power2.out" });
+                }}
+                onMouseLeave={(e) => {
+                  gsap.to(e.currentTarget, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+                }}
+              >
+                <div className="social-link-bg"></div>
+                <span className="social-link-text">
+                  <SplitText text={s} delay={100 + (index * 50)} immediate={true} />
+                </span>
+                <div className="social-link-border"></div>
+              </a>
+            ))}
+          </div>
+        </MagicCard>
       </div>
     </section>
   );
