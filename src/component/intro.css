@@ -1,8 +1,4 @@
-:root {
-  --background-dark: #020617;
-  --glow-color: 59, 130, 246; /* Blue RGB */
-  --border-color: rgba(59, 130, 246, 0.2);
-}
+
 
 .intro-section {
   min-height: 100vh;

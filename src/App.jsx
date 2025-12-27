@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Spline from "@splinetool/react-spline";
 import "./App.css";
-import "./component/MemoryCarousel.css";
 import MemoryCarousel from "./component/MemoryCarousel";
 import Intro from "./component/intro";
 import ThreeScene from "./component/ThreeScene";
@@ -10,14 +9,14 @@ import LogoLoader from "./component/LogoLoader";
 import ProjectsWithLanyard from "./component/ProjectsWithLanyard";
 import Card from "./component/Card.jsx";
 import TechLogoGlassGallery from "./component/TechLogoGlassGallery";
+
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);
-    }, 3000); // 3 seconds
-
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,24 +35,30 @@ export default function App() {
 
       {/* ===== SCROLLABLE FOREGROUND ===== */}
       <div className="foreground">
+        
+        {/* NEW LIVE BACKGROUND IMAGE LAYER */}
+        <div className="live-bg-container">
+          <div className="live-bg-image" />
+          <div className="live-bg-overlay" />
+        </div>
+
         <div className="wave-wrapper">
           <div className="wave" />
         </div>
 
         <section className="content-section">
-           <div className="ambient-bg">
-          <Intro />
+          <div className="ambient-bg">
+            <Intro />
+            <TechLogoGlassGallery />
           </div>
         </section>
 
         <section className="content-section darker">
           <div className="ambient-bg dark">
-          <ThreeScene />
-          <MemoryCarousel />
-          <Card/>
-          
-          <ProjectsWithLanyard />
-          <TechLogoGlassGallery />
+            <ThreeScene />
+            <MemoryCarousel />
+            <ProjectsWithLanyard />
+            <Card />
           </div>
         </section>
       </div>
