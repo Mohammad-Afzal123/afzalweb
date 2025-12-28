@@ -109,6 +109,7 @@ body,
   width: 100%;
   min-height: 100vh;
   padding: 6rem 4rem;
+  padding-left: 0rem;
   background: rgba(2, 6, 23, 0.35); 
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);

@@ -40,9 +40,7 @@ const Card = ({ name, bio, img, month, date }) => {
 const CardSection = () => {
   return (
     <div style={{ minHeight: '100vh', padding: '50px 0' }}>
-      <h1 style={{ color: 'white', textAlign: 'center', marginBottom: '40px', fontFamily: 'sans-serif' }}>
-        Our Team
-      </h1>
+      
       <div style={{ 
         display: 'flex', 
         flexWrap: 'wrap', 

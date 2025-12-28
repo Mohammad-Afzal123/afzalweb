@@ -1,0 +1,50 @@
+.section-title-wrapper {
+  position: relative;
+  text-align: center;
+  margin: 7rem 0 4rem;
+  z-index: 6;
+}
+
+/* ===== TITLE ===== */
+.section-title {
+  font-size: clamp(2.4rem, 3.4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+
+  /* base glow */
+  text-shadow:
+    0 0 14px rgba(56, 189, 248, 0.35),
+    0 0 40px rgba(56, 189, 248, 0.25);
+
+  /* smooth glow transition on scroll */
+  transition: text-shadow 0.6s ease;
+}
+
+/* stronger glow when visible */
+.section-title-wrapper:has(.section-title) {
+  filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.35));
+}
+
+/* ===== UNDERLINE ===== */
+.section-underline {
+  margin: 1.6rem auto 0;
+  width: 110px;
+  height: 4px;
+  border-radius: 999px;
+  transform-origin: center;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #38bdf8,
+    #60a5fa,
+    #38bdf8,
+    transparent
+  );
+
+  box-shadow:
+    0 0 18px rgba(56, 189, 248, 0.6),
+    0 0 40px rgba(56, 189, 248, 0.4);
+}

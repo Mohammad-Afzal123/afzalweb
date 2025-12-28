@@ -9,7 +9,7 @@ import LogoLoader from "./component/LogoLoader";
 import ProjectsWithLanyard from "./component/ProjectsWithLanyard";
 import Card from "./component/Card.jsx";
 import TechLogoGlassGallery from "./component/TechLogoGlassGallery";
-
+import SectionTitle from "./component/SectionTitle";
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
 
@@ -49,6 +49,10 @@ export default function App() {
         <section className="content-section">
           <div className="ambient-bg">
             <Intro />
+            <SectionTitle
+      title="Skills"
+      subtitle="Technologies & Tools"
+    />
             <TechLogoGlassGallery />
           </div>
         </section>
@@ -56,11 +60,16 @@ export default function App() {
         <section className="content-section darker">
           <div className="ambient-bg dark">
             <ThreeScene />
+            <SectionTitle
+      title="Projects"
+    />
             <MemoryCarousel />
+             <SectionTitle
+      title="Education"
+    />
             <ProjectsWithLanyard />
-            
-            
-            
+            <SectionTitle
+      title="Testimonials" />
             <Card />
           </div>
         </section>
