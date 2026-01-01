@@ -190,6 +190,7 @@ export default function Intro() {
                 <motion.span variants={scrollFadeUp} className="text-line">CSE(Data Science)</motion.span>
                 <motion.span variants={scrollFadeUp} className="text-line">VIT Chennai</motion.span>
                 <motion.span variants={scrollFadeUp} className="text-line">AIML Developer</motion.span>
+                <motion.span variants={scrollFadeUp} className="text-line">Full Stack Developer</motion.span>
               </motion.h2>
               <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollFadeUp} className="hero-description">
                 Blending AI with modern architectural expression.
@@ -206,7 +207,7 @@ export default function Intro() {
 
           <div className="intro-column">
             <MagicCard className="portrait-card">
-              <img src="https://i.pinimg.com/564x/c8/c8/f7/c8c8f7952323e42689d54593466a9430.jpg" alt="Portrait" className="portrait-image" />
+              <img src="afzalkhan.jpg" alt="Portrait" className="portrait-image" />
             </MagicCard>
 
             <MagicCard className="contact-card matched-height highlight-blue">
