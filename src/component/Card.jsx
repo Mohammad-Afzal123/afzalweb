@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 // 1. DATA ARRAY: 10 different people with unique images
 const peopleData = [
-  { id: 1, name: "Sarah Jenkins", role: "Software Architect", img: "https://i.pravatar.cc/400?u=1", month: "JAN", date: "12", bio: "Building scalable distributed systems." },
-  { id: 2, name: "Marcus Chen", role: "UI Designer", img: "https://i.pravatar.cc/400?u=2", month: "FEB", date: "05", bio: "Creating intuitive human interfaces." },
+  { id: 1, name: "Mahmad Nazeer Khan", role: "Software Engineer", img: "https://i.pravatar.cc/400?u=1", month: "JAN", date: "12", bio: "Building scalable distributed systems." },
+  { id: 2, name: "Abhiram Sharma", role: "Friend", img: "https://i.pravatar.cc/400?u=2", month: "FEB", date: "05", bio: "Creating intuitive human interfaces." },
   { id: 3, name: "Elena Rodriguez", role: "Product Lead", img: "https://i.pravatar.cc/400?u=3", month: "MAR", date: "22", bio: "Bridging business and tech goals." },
   { id: 4, name: "David Kim", role: "Data Scientist", img: "https://i.pravatar.cc/400?u=4", month: "APR", date: "18", bio: "Unlocking patterns in big data." },
   { id: 5, name: "Aisha Yusuf", role: "DevOps Expert", img: "https://i.pravatar.cc/400?u=5", month: "MAY", date: "30", bio: "Automating the digital future." },
